@@ -75,7 +75,13 @@ public class Store {
         System.out.println(inventory);
         System.out.println("To add a product to you cart, enter the product ID: ");
         String chosenProductId = scanner.nextLine();
-        for (inventory product :  )
+        for (Product product : inventory) {
+            if (product.getId().equals(chosenProductId)) {
+                cart.add(product);
+                System.out.println(product.getName() + " is successfully added to your cart!");
+            }
+
+        }
         // This method should display a list of products from the inventory,
         // and prompt the user to add items to their cart. The method should
         // prompt the user to enter the ID of the product they want to add to
