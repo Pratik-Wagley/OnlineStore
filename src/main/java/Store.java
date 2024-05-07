@@ -72,6 +72,7 @@ public class Store {
     }
 
     public static void displayProducts(ArrayList<Product> inventory, ArrayList<Product> cart, Scanner scanner) {
+        System.out.println("inventory: ");
         System.out.println(inventory);
         System.out.println("To add a product to you cart, enter the product ID: ");
         String chosenProductId = scanner.nextLine();
@@ -143,9 +144,18 @@ public class Store {
         // from their account if they confirm.
     }
 
-    public static Product findProductById(String id, ArrayList<Product> inventory) {
+    public static void findProductById(String id, ArrayList<Product> inventory, Scanner scanner) {
         System.out.println("Enter the product ID to find your product: ");
-        String
+        String userInput = scanner.nextLine();
+        for (Product product : inventory) {
+            if (userInput.equals(product.getId())) {
+                System.out.println("Your product is: " + product.getName());
+            } else {
+                System.out.println("Product not found");
+            }
+
+        }
+
         // This method should search the inventory ArrayList for a product with
         // the specified ID, and return the corresponding Product object. If
         // no product with the specified ID is found, the method should return
