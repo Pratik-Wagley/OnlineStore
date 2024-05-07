@@ -95,25 +95,23 @@ public class Store {
             System.out.println("Product id: " + product.getId() + " Name: " + product.getName());
             totalAmount = totalAmount + product.getPrice();
         }
-        System.out.println("Your total is: " + totalAmount);
+        System.out.println("Your total is: $" + totalAmount);
 
         boolean remove;
         System.out.println("To remove a product from your cart, enter the product ID.\n To not make any changes enter X: ");
         String userInput = scanner.nextLine();
         for (Product product : cart) {
-            while (remove) {
                 if (userInput.equals(product.getId())) {
                     cart.remove(product);
-                } else if (userInput.equals("X") || userInput.equals("x") {
-                    remove = true;
                 } else {
                     System.out.println("Invalid Input, please try again!");
                 }
                 totalAmount = totalAmount + product.getPrice();
-            }
 
             System.out.println("Your cart has been updated successfully!\n Here is your updated cart: ");
             System.out.println("Product id: " + product.getId() + " Name: " + product.getName());
+            System.out.println("Your total is: $" + totalAmount);
+
 
         }
 
@@ -127,7 +125,18 @@ public class Store {
         // variable accordingly.
     }
 
-    public static void checkOut(ArrayList<Product> cart, double totalAmount) {
+    public static void checkOut(ArrayList<Product> cart, double totalAmount, Scanner scanner) {
+        for (Product product : cart) {
+            totalAmount = totalAmount + product.getPrice();
+            System.out.println("Your total amount is: $" + totalAmount);
+        }
+        System.out.println("To confirm your purchase enter C: ");
+        String userInput = scanner.nextLine().toUpperCase();
+        if (userInput.equals("C")) {
+            System.out.println("Purchase confirmed!\n You payed: " + totalAmount);
+        } else {
+            System.out.println("Invalid command");
+        }
         // This method should calculate the total cost of all items in the cart,
         // and display a summary of the purchase to the user. The method should
         // prompt the user to confirm the purchase, and deduct the total cost
@@ -135,6 +144,8 @@ public class Store {
     }
 
     public static Product findProductById(String id, ArrayList<Product> inventory) {
+        System.out.println("Enter the product ID to find your product: ");
+        String
         // This method should search the inventory ArrayList for a product with
         // the specified ID, and return the corresponding Product object. If
         // no product with the specified ID is found, the method should return
