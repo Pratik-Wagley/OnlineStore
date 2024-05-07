@@ -72,7 +72,7 @@ public class Store {
     }
 
     public static void displayProducts(ArrayList<Product> inventory, ArrayList<Product> cart, Scanner scanner) {
-        System.out.println("inventory: ");
+        System.out.println("inven");
         System.out.println(inventory);
         System.out.println("To add a product to you cart, enter the product ID: ");
         String chosenProductId = scanner.nextLine();
