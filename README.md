@@ -1,21 +1,20 @@
-# Project Title
+# Online Store
 
 ## Description of the Project
 
-Briefly describe what this Java console application does. Mention its purpose and who the intended users are. Explain the main functionality and what problems it aims to solve.
-
-![Class Diagram](path/to/your/class_diagram.png)
+This project allows you to view inventory ehich is loaded from a csv file. It also lets you add your product to your cart, view and edit your cart, and finally, Checkout.
 
 ## User Stories
+- As a user, I want to be able to view the current inventory, so I can decide which products I want.
+- As a user, I want to be able to add products unto my cart, so i can store my desired products.
+- As a user, I want to be able to view my cart, so I can see which products are in my cart.
+- As a user, I want to be able to remove products from my cart if i no longer want a product.
+- As a user, I want to be able to checkout so I can purchase my products.
 
-List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
 
-- As a user, I want to be able to input my data, so that the application can process it accordingly.
-- As a user, I want to receive immediate feedback, so I can understand what to do next.
 
 ## Setup
-
-Instructions on how to set up and run the project using IntelliJ IDEA.
+On intellij, You should creat a new project. Then Copy and paste each class to its and files. To run the project, press the green run button on the top right corner on the screen. 
 
 ### Prerequisites
 
@@ -34,12 +33,10 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Technologies Used
 
-- Java: Mention the version you are using.
-- Any additional libraries or frameworks used in the project.
+- Java: version 17
 
 ## Demo
 
-Include screenshots or GIFs that show your application in action. Use tools like [Giphy Capture](https://giphy.com/apps/giphycapture) to record a GIF of your application.
 
 ![Application Screenshot](path/to/your/screenshot.png)
 
@@ -47,20 +44,13 @@ Include screenshots or GIFs that show your application in action. Use tools like
 
 Outline potential future enhancements or functionalities you might consider adding:
 
-- Additional feature to be developed.
-- Improvement of current functionalities.
-
-## Resources
-
-List resources such as tutorials, articles, or documentation that helped you during the project.
-
-- [Java Programming Tutorial](https://www.example.com)
-- [Effective Java](https://www.example.com)
+- GUI for the application.
+- Fix potential errors.
 
 
 ## Thanks
 
 Express gratitude towards those who provided help, guidance, or resources:
 
-- Thank you to [Mentor's Name] for continuous support and guidance.
-- A special thanks to all teammates for their dedication and teamwork.
+- Thank you to Raymond for continuous support and guidance.
+
