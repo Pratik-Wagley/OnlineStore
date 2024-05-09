@@ -1,11 +1,13 @@
 
 import com.pluralsight.Product;
+import com.pluralsight.UsersBalance;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class Store {
 
@@ -18,6 +20,8 @@ public class Store {
         // Load inventory from CSV file
         loadInventory("products.csv", inventory);
 
+        UsersBalance usersBalance = new UsersBalance(500);
+
         // Create scanner to read user input
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
@@ -29,6 +33,7 @@ public class Store {
             System.out.println("2. Show Cart");
             System.out.println("3. Exit");
             System.out.println("4. Find product by ID");
+            System.out.println("5. Checkout");
 
             choice = scanner.nextInt();
             scanner.nextLine();
@@ -46,6 +51,9 @@ public class Store {
                     break;
                 case 4:
                     findProductById(inventory, scanner);
+                case 5:
+                    checkOut(cart, scanner, usersBalance);
+                    break;
                 default:
                     System.out.println("Invalid choice!");
                     break;
@@ -104,32 +112,34 @@ public class Store {
         boolean running = true;
         System.out.println("To remove a product from your cart, enter the product ID.\nTo not make any changes enter X: ");
         String userInput = scanner.nextLine();
-       while (running) {
-           if (userInput.equalsIgnoreCase("X")){
-               running = false;
-           }
+        while (running) {
+            if (userInput.equalsIgnoreCase("X")) {
+                running = false;
+            }
             for (Product product : cart) {
                 if (userInput.equals(product.getId())) {
                     cart.remove(product);
                     totalAmount -= product.getPrice();
                     System.out.println("Your cart has been updated successfully!\nHere is your updated cart: ");
-                   for (Product updatedProduct : cart) {
-                       System.out.println("Product id: " + product.getId() + " Name: " + product.getName());
-                   }
+                    for (Product updatedProduct : cart) {
+                        System.out.println("Product id: " + product.getId() + " Name: " + product.getName());
+                    }
                     System.out.println("Your total is: $" + totalAmount);
-                   break;
 
-                }
-                } if (running) {
                     System.out.println("To remove another product from your cart, enter the product ID.\nTo not make any changes enter X: ");
                     userInput = scanner.nextLine();
 
-                }  else {
-               System.out.println("Invalid Input, please try again!");
+                }
+            }
+            if (running) {
+                System.out.println("To remove another product from your cart, enter the product ID.\nTo not make any changes enter X: ");
+                userInput = scanner.nextLine();
+
+            } else {
+                System.out.println("Invalid Input, please try again!");
 
             }
         }
-
 
 
         // This method should display the items in the cart ArrayList, along
@@ -139,15 +149,24 @@ public class Store {
         // variable accordingly.
     }
 
-    public static void checkOut(ArrayList<Product> cart, double totalAmount, Scanner scanner) {
+    public static void checkOut(ArrayList<Product> cart, Scanner scanner, UsersBalance usersBalance) {
+        double totalAmount = 0;
         for (Product product : cart) {
             totalAmount = totalAmount + product.getPrice();
-            System.out.println("Your total amount is: $" + totalAmount);
         }
+        System.out.println("Your total amount is: $" + totalAmount);
         System.out.println("To confirm your purchase enter C: ");
         String userInput = scanner.nextLine().toUpperCase();
         if (userInput.equals("C")) {
-            System.out.println("Purchase confirmed!\n You payed: " + totalAmount);
+            while (usersBalance.getUsersBalance() >= totalAmount) {
+                System.out.println("Purchase confirmed!\n You payed: " + totalAmount);
+                usersBalance.setUsersBalance(usersBalance.getUsersBalance() - totalAmount);
+                System.out.println("Your remaining balance is " + usersBalance.getUsersBalance());
+            }
+            if (usersBalance.getUsersBalance() < totalAmount) {
+                System.out.println("Insufficient Funds");
+            }
+
         } else {
             System.out.println("Invalid command");
         }
@@ -168,6 +187,7 @@ public class Store {
             }
 
         }
+
 
         // This method should search the inventory ArrayList for a product with
         // the specified ID, and return the corresponding Product object. If
