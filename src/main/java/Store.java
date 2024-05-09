@@ -28,6 +28,7 @@ public class Store {
             System.out.println("1. Show Products");
             System.out.println("2. Show Cart");
             System.out.println("3. Exit");
+            System.out.println("4. Find product by ID");
 
             choice = scanner.nextInt();
             scanner.nextLine();
@@ -43,6 +44,8 @@ public class Store {
                 case 3:
                     System.out.println("Thank you for shopping with us!");
                     break;
+                case 4:
+                    findProductById(inventory, scanner);
                 default:
                     System.out.println("Invalid choice!");
                     break;
@@ -72,7 +75,7 @@ public class Store {
     }
 
     public static void displayProducts(ArrayList<Product> inventory, ArrayList<Product> cart, Scanner scanner) {
-        System.out.println("inven");
+        System.out.println("Inveentory");
         System.out.println(inventory);
         System.out.println("To add a product to you cart, enter the product ID: ");
         String chosenProductId = scanner.nextLine();
@@ -98,24 +101,34 @@ public class Store {
         }
         System.out.println("Your total is: $" + totalAmount);
 
-        boolean remove;
-        System.out.println("To remove a product from your cart, enter the product ID.\n To not make any changes enter X: ");
+        boolean running = true;
+        System.out.println("To remove a product from your cart, enter the product ID.\nTo not make any changes enter X: ");
         String userInput = scanner.nextLine();
-        for (Product product : cart) {
+       while (running) {
+           if (userInput.equalsIgnoreCase("X")){
+               running = false;
+           }
+            for (Product product : cart) {
                 if (userInput.equals(product.getId())) {
                     cart.remove(product);
-                } else {
-                    System.out.println("Invalid Input, please try again!");
+                    totalAmount -= product.getPrice();
+                    System.out.println("Your cart has been updated successfully!\nHere is your updated cart: ");
+                   for (Product updatedProduct : cart) {
+                       System.out.println("Product id: " + product.getId() + " Name: " + product.getName());
+                   }
+                    System.out.println("Your total is: $" + totalAmount);
+                   break;
+
                 }
-                totalAmount = totalAmount + product.getPrice();
+                } if (running) {
+                    System.out.println("To remove another product from your cart, enter the product ID.\nTo not make any changes enter X: ");
+                    userInput = scanner.nextLine();
 
-            System.out.println("Your cart has been updated successfully!\n Here is your updated cart: ");
-            System.out.println("Product id: " + product.getId() + " Name: " + product.getName());
-            System.out.println("Your total is: $" + totalAmount);
+                }  else {
+               System.out.println("Invalid Input, please try again!");
 
-
+            }
         }
-
 
 
 
@@ -144,7 +157,7 @@ public class Store {
         // from their account if they confirm.
     }
 
-    public static void findProductById(String id, ArrayList<Product> inventory, Scanner scanner) {
+    public static void findProductById(ArrayList<Product> inventory, Scanner scanner) {
         System.out.println("Enter the product ID to find your product: ");
         String userInput = scanner.nextLine();
         for (Product product : inventory) {
